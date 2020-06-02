@@ -81,12 +81,12 @@ pipeline {
                 script{
 
                     if (env.BRANCH_NAME == 'master') {
-                        build '../job/deploymultibranch/master'
+                        build '../deploymultibranch/master'
                     } else if (env.BRANCH_NAME == 'dev') {
-                        build '../job/deploymultibranch/dev'
-                        build '../job/deploymultibranch/beta'
+                        build '../deploymultibranch/dev'
+                        build '../deploymultibranch/beta'
                     } else if (env.BRANCH_NAME == 'beta') {
-                        build '../job/deploymultibranch/beta'
+                        build '../deploymultibranch/beta'
                     }
 
                 }
