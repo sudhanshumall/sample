@@ -9,6 +9,10 @@
 pipeline {
     //agent any
 
+    options { 
+    disableConcurrentBuilds() 
+    }
+    
     environment {
        BUCKET = "${S3_BUCKET}"
      }
