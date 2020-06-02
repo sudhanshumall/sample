@@ -84,6 +84,7 @@ pipeline {
                         build '../deploymultibranch/master'
                     } else if (env.BRANCH_NAME == 'dev') {
                         build '../deploymultibranch/dev'
+                        build '../deploymultibranch/beta'
                     } else if (env.BRANCH_NAME == 'beta') {
                         build '../deploymultibranch/beta'
                     }
