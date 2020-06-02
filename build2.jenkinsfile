@@ -1,0 +1,78 @@
+// Define variable
+ def M2_REPO = "/var/lib/jenkins/.m2/${BRANCH_NAME}"
+ def JOB = JOB_NAME.tokenize('/') as String[]
+ def JOBNAME = JOB[0]
+ def S3_BUCKET = JOBNAME
+ 
+ 
+
+pipeline {
+    //agent any
+
+    environment {
+       BUCKET = "${S3_BUCKET}"
+     }
+    
+    agent {
+        label {
+            label ""
+            customWorkspace "/var/jenkins_home/${BRANCH_NAME}"
+            }
+        }
+
+    stages {
+        stage('Building') {
+
+            steps {
+
+                sh '''  
+                    echo "Building the code"
+
+                '''
+            }
+        }
+
+        stage('Deploying Jar Dependencies to JFrog ') {
+
+            steps {
+
+                sh '''  
+
+                    if [ $BRANCH_NAME = "master" ] ; then
+                        echo "deploying $BRANCH_NAME to jfrog"
+                        
+
+                    elif [ $BRANCH_NAME = "beta" ] ; then
+                        echo "deploying $BRANCH_NAME to jfrog"
+                        
+
+                    elif [ $BRANCH_NAME = "dev" ] ; then
+                        echo "deploying $BRANCH_NAME to jfrog"
+                        
+
+                    elif [ $BRANCH_NAME = "master-war" ] ; then
+                        echo "deploying $BRANCH_NAME to jfrog"
+                        
+                    fi    
+
+                '''
+            }
+        }
+
+        stage('Details') {
+
+            steps {
+
+                sh '''  
+                    echo "---------------------------------"
+                    echo "Branch Name : ${BRANCH_NAME}"
+                    echo "Build Number : ${BUILD_NUMBER}"
+                    
+                    echo "---------------------------------"
+
+                '''
+            }
+        }
+
+    }
+}
