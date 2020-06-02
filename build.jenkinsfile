@@ -74,5 +74,25 @@ pipeline {
             }
         }
 
+        stage('Triggering Child Job') {
+
+            steps {
+
+                script{
+
+                    if (env.BRANCH_NAME == 'master') {
+                        build '../deploymultibranch/master'
+                    } else if (env.BRANCH_NAME == 'dev') {
+                        build '../deploymultibranch/dev'
+                    } else if (env.BRANCH_NAME == 'beta') {
+                        build '../deploymultibranch/beta'
+                    }
+
+                }
+
+
+            }
+        }
+
     }
 }
