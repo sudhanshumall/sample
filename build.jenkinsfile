@@ -106,13 +106,19 @@ pipeline {
                     // } else if (env.BRANCH_NAME == 'beta') {
                     //     build '../deploymultibranch/beta'
                     // }
+
+                    def params=[]
+                        env.getEnvironment().each{ k, v ->
+                        params.add(string(name:"${k}", value:"${v}"))
+                    }
+                    build job: '../deploying', parameters:params
                     // def myparams = currentBuild.rawBuild.getAction(ParametersAction).getParameters()
                     // build job: '../deploying', parameters: myparams
-                    if (env.ENVIRONMENT == 'dev') {
-                    build job: '../deploying', parameters: [[$class: 'ChoiceParameterValue', name: 'ENVIRONMENT', value: 'dev']]
-                    } else if (env.ENVIRONMENT == 'beta') {
-                    build job:'../deploying', parameters: [[$class: 'ChoiceParameterValue', name: 'ENVIRONMENT', value: 'betaT']]
-                    }
+                    // if (env.ENVIRONMENT == 'dev') {
+                    // build job: '../deploying', parameters: [[$class: 'ChoiceParameterValue', name: 'ENVIRONMENT', value: 'dev']]
+                    // } else if (env.ENVIRONMENT == 'beta') {
+                    // build job:'../deploying', parameters: [[$class: 'ChoiceParameterValue', name: 'ENVIRONMENT', value: 'betaT']]
+                    // }
 
                 }
 
