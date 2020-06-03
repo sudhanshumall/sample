@@ -107,9 +107,9 @@ pipeline {
                     //     build '../deploymultibranch/beta'
                     // }
 
-                    if (env.ENVIRONMENT == dev) {
+                    if (env.ENVIRONMENT == 'dev') {
                     build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: dev]]
-                    } else if (env.ENVIRONMENT == beta) {
+                    } else if (env.ENVIRONMENT == 'beta') {
                     build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: beta]]
                     }
 
