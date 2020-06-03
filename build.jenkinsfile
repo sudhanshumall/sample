@@ -108,9 +108,9 @@ pipeline {
                     // }
 
                     if (env.ENVIRONMENT == 'dev') {
-                    build '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: 'dev']]
+                    build '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: '${params.ENVIRONMENT']]
                     } else if (env.ENVIRONMENT == 'beta') {
-                    build '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: 'beta']]
+                    build '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: '${params.ENVIRONMENT']]
                     }
 
                 }
