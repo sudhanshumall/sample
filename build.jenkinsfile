@@ -33,7 +33,7 @@ pipeline {
 
 
         choice(
-            choices: ['local-onpremise' , 'qa' , 'prod' , 'dev'],
+            choices: ['local-onpremise' , 'beta' , 'prod' , 'dev'],
             description: '<b> Select Environment where you want to deploy after building  </b>',
             name: 'ENVIRONMENT')
     }
@@ -108,9 +108,9 @@ pipeline {
                     // }
 
                     if (env.ENVIRONMENT == 'dev') {
-                    build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: dev]]
+                    build '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: 'dev']]
                     } else if (env.ENVIRONMENT == 'beta') {
-                    build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: beta]]
+                    build '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: 'beta']]
                     }
 
                 }
