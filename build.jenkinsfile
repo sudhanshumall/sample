@@ -109,8 +109,7 @@ pipeline {
 
                     if (ENVIRONMENT == dev) {
                     build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: dev]]
-                    } else if 
-                    (ENVIRONMENT == beta) {
+                    } else if (ENVIRONMENT == beta) {
                     build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: beta]]
                     }
 
