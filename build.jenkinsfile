@@ -16,13 +16,27 @@ pipeline {
     environment {
        BUCKET = "${S3_BUCKET}"
      }
-    
+
     agent {
         label {
             label ""
             customWorkspace "/var/jenkins_home/${BRANCH_NAME}"
             }
         }
+
+    parameters {
+
+        choice(
+            choices: ['dev' , 'beta' , 'master' ],
+            description: '<b> Select Branch which you want to build </b>',
+            name: 'BRANCH_NAME')
+
+
+        choice(
+            choices: ['local-onpremise' , 'qa' , 'prod' , 'dev'],
+            description: '<b> Select Environment where you want to deploy after building  </b>',
+            name: 'ENVIRONMENT')
+    }
 
     stages {
         stage('Building') {
@@ -84,17 +98,23 @@ pipeline {
 
                 script{
 
-                    if (env.BRANCH_NAME == 'master') {
-                        build '../deploymultibranch/master'
-                    } else if (env.BRANCH_NAME == 'dev') {
-                        build '../deploymultibranch/dev'
-                        build '../deploymultibranch/beta'
-                    } else if (env.BRANCH_NAME == 'beta') {
-                        build '../deploymultibranch/beta'
+                    // if (env.BRANCH_NAME == 'master') {
+                    //     build '../deploymultibranch/master'
+                    // } else if (env.BRANCH_NAME == 'dev') {
+                    //     build '../deploymultibranch/dev'
+                    //     build '../deploymultibranch/beta'
+                    // } else if (env.BRANCH_NAME == 'beta') {
+                    //     build '../deploymultibranch/beta'
+                    // }
+
+                    if (ENVIRONMENT = dev) {
+                    build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: dev]]
+                    } else if 
+                    (ENVIRONMENT = beta) {
+                    build job: '../deploying', parameters: [[$class: 'StringParameterValue', name: 'ENVIRONMENT', value: beta]]
                     }
 
                 }
-
 
             }
         }
