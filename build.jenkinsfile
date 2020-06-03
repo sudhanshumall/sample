@@ -111,7 +111,7 @@ pipeline {
                         env.getEnvironment().each{ k, v ->
                         params.add(string(name:"${k}", value:"${v}"))
                     }
-                    build job: '../deploying', parameters:params
+                    build job: "../deploying/${BRANCH_NAME}", parameters:params
                     // def myparams = currentBuild.rawBuild.getAction(ParametersAction).getParameters()
                     // build job: '../deploying', parameters: myparams
                     // if (env.ENVIRONMENT == 'dev') {
