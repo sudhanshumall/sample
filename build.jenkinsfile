@@ -107,11 +107,16 @@ pipeline {
                     //     build '../deploymultibranch/beta'
                     // }
 
-                    def params=[]
-                        env.getEnvironment().each{ k, v ->
-                        params.add(string(name:"${k}", value:"${v}"))
-                    }
-                    build '../deploying/', parameters:params
+                    List<ParameterValue> newParams = [
+                    new StringParameterValue('ENVIRONMENT', params.ENVIRONMENT)
+                    ]
+                    build(job: "../deploying/", parameters: newParams, propagate: false)
+
+                    // def params=[]
+                    //     env.getEnvironment().each{ k, v ->
+                    //     params.add(string(name:"${k}", value:"${v}"))
+                    // }
+                    // build '../deploying/', parameters:params
                     // def myparams = currentBuild.rawBuild.getAction(ParametersAction).getParameters()
                     // build job: '../deploying', parameters: myparams
                     // if (env.ENVIRONMENT == 'dev') {
