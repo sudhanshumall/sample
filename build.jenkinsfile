@@ -110,7 +110,7 @@ pipeline {
                     List<ParameterValue> newParams = [
                     new StringParameterValue('ENVIRONMENT', params.ENVIRONMENT)
                     ]
-                    build(job: "../deploying/", parameters: newParams, propagate: false)
+                    build(job: "../deploying", parameters: newParams, propagate: false)
 
                     // def params=[]
                     //     env.getEnvironment().each{ k, v ->
