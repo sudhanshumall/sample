@@ -39,6 +39,19 @@ pipeline {
     }
 
     stages {
+
+        stage('Updating Config') {
+            steps {
+                sh '''
+
+                    sed -i 's/spring.datasource.username.*/spring.datasource.username = produser/g' application.properties                    
+                    sed -i 's/spring.datasource.password.*/spring.datasource.password = prod@kagamierp/g' application.properties
+                    sed -i 's/spring.datasource.url.*/spring.datasource.url = jdbc:mysql://localhost:3306/kagamiauth/g' application.properties
+
+                ''' 
+            }
+        }
+
         stage('Building') {
 
             steps {
